@@ -11,8 +11,7 @@ gen64() {
 	}
 	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
 }
-install_3proxy() {
-    echo "installing 3proxy"
+install_3proxy() {echo "installing 3proxy"
     mkdir -p /3proxy
     cd /3proxy
     URL="https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz"
@@ -35,7 +34,7 @@ install_3proxy() {
     echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
     sysctl -p
     systemctl stop firewalld
-    systemctl disable firewalld
+ systemctl disable firewalld
     cd $WORKDIR
 }
 gen_3proxy() {
@@ -59,8 +58,7 @@ $(awk -F "/" '{print "auth none\n" \
 "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
-}
-gen_proxy_file_for_user() {
+}gen_proxy_file_for_user() {
     cat >proxy.txt <<EOF
 $(awk -F "/" '{print $3 ":" $4 ":" $1 ":" $2 }' ${WORKDATA})
 EOF
@@ -86,7 +84,8 @@ EOF
 }
 gen_ifconfig() {
     cat <<EOF
-$(awk -F "/" '{print "ifconfig '$main_interface' inet6 add " $5 "/64"}' ${WORKDATA})
+$(awk -F "/" '{print "ifconfig '$main_interface' inet6 add " $5 "/64"}' ${WORKDAT
+A})
 EOF
 }
 echo "installing apps"
